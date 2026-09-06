@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbita — dasturlash studiyasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EDF2F4;
+    --grid:#D2DEE2;
+    --ink:#142430;
+    --ink-soft:#51636E;
+    --blue:#1C5D82;
+    --blue-deep:#0F3E58;
+    --orange:#D8622C;
+    --panel:#FFFFFF;
+    --dark:#142430;
+    --dark-text:#CFE3EC;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 88px),
+      repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 88px),
+      var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16.5px;
+    line-height:1.6;
+  }
+  h1,h2,h3,.brand{
+    font-family:'Space Grotesk', sans-serif;
+    color:var(--ink);
+    margin:0;
+    font-weight:600;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(237,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--grid);
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{font-size:22px; letter-spacing:0.01em;}
+  .brand .dot{color:var(--orange);}
+  nav{display:flex; align-items:center; gap:30px;}
+  nav a{font-size:14.5px; text-decoration:none; color:var(--ink-soft);}
+  nav a:hover{color:var(--blue);}
+  .btn{
+    display:inline-block;
+    padding:10px 20px;
+    border:1.5px solid var(--ink);
+    font-size:14px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:all .18s ease;
+  }
+  .btn:hover{background:var(--ink); color:var(--bg);}
+  .btn-solid{background:var(--orange); border-color:var(--orange); color:#fff;}
+  .btn-solid:hover{background:#B84E20; border-color:#B84E20; color:#fff;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 70px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:50px;
+    align-items:center;
+  }
+  .hero-label{
+    font-size:14px;
+    color:var(--blue);
+    margin-bottom:18px;
+  }
+  .hero-label .bar{
+    display:inline-block; width:26px; height:2px; background:var(--orange);
+    vertical-align:middle; margin-right:10px;
+  }
+  .hero h1{
+    font-size:44px;
+    line-height:1.16;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    font-size:17px;
+  }
+  .hero-ctas{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+
+  .term{
+    background:var(--dark);
+    color:var(--dark-text);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:8px 8px 0 var(--blue-deep);
+  }
+  .term-bar{
+    display:flex; gap:7px; padding:12px 14px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .term-bar span{width:10px; height:10px; border-radius:50%; background:#3A4E58;}
+  .term-body{padding:20px 22px; font-size:13.5px; line-height:1.85;}
+  .term-body .c1{color:#7FB88F;}
+  .term-body .c2{color:#E0A458;}
+  .term-body .c3{color:#6BA9CF;}
+  .term-body .muted{color:#6E8590;}
+
+  /* ---------- Stats strip ---------- */
+  .stats{
+    border-top:1px solid var(--grid);
+    border-bottom:1px solid var(--grid);
+    padding:26px 0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .stat b{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:30px;
+    display:block;
+    color:var(--blue-deep);
+  }
+  .stat span{font-size:13.5px; color:var(--ink-soft);}
+
+  /* ---------- Section heading ---------- */
+  .sec-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:40px;
+  }
+  .sec-num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--orange);
+    font-size:14px;
+  }
+  .sec-head h2{font-size:30px;}
+  section.block{padding:80px 0;}
+
+  /* ---------- Services ---------- */
+  .services-list{border-top:1px solid var(--grid);}
+  .service-row{
+    display:grid;
+    grid-template-columns:56px 1.3fr 1.7fr;
+    gap:24px;
+    padding:26px 0;
+    border-bottom:1px solid var(--grid);
+    align-items:baseline;
+  }
+  .service-row .idx{font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); font-size:14px;}
+  .service-row h3{font-size:19px;}
+  .service-row p{color:var(--ink-soft); font-size:15px; margin:0;}
+
+  /* ---------- Process ---------- */
+  .process{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:0;
+    border:1px solid var(--grid);
+  }
+  .proc-step{
+    padding:26px 20px;
+    border-right:1px solid var(--grid);
+    position:relative;
+  }
+  .proc-step:last-child{border-right:none;}
+  .proc-step .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:26px;
+    color:var(--blue);
+    display:block;
+    margin-bottom:14px;
+  }
+  .proc-step h3{font-size:16px; margin-bottom:8px;}
+  .proc-step p{font-size:13.8px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- Projects ---------- */
+  .projects{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    border-top:1px solid var(--grid);
+    border-left:1px solid var(--grid);
+  }
+  .project{
+    border-right:1px solid var(--grid);
+    border-bottom:1px solid var(--grid);
+    padding:30px 26px;
+    background:var(--panel);
+  }
+  .project .ptag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--blue);
+    margin-bottom:14px;
+    display:block;
+  }
+  .project h3{font-size:19px; margin-bottom:10px;}
+  .project p{font-size:14.5px; color:var(--ink-soft); margin:0 0 16px;}
+  .project .metric{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:22px;
+    color:var(--orange);
+  }
+  .project .metric-label{
+    display:block;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Sans', sans-serif;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    background:var(--dark);
+    color:var(--dark-text);
+  }
+  .contact .sec-head h2{color:#fff;}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:50px;
+  }
+  .contact p.lede{color:#9FB4BE; max-width:40ch;}
+  .contact-detail{margin-top:26px; font-size:14.5px;}
+  .contact-detail div{margin-bottom:10px; color:#B9CBD3;}
+  .contact-detail b{color:#fff; font-weight:500;}
+
+  form{display:grid; gap:14px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:13px; color:#9FB4BE;}
+  .field input, .field select, .field textarea{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.18);
+    color:#fff;
+    padding:12px 14px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14.5px;
+    outline:none;
+    border-radius:2px;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--orange);}
+  form button{
+    justify-self:start;
+    margin-top:6px;
+    background:var(--orange);
+    color:#fff;
+    border:none;
+    padding:13px 26px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:15px;
+    cursor:pointer;
+  }
+  form button:hover{background:#B84E20;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:26px 0;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:13.5px; color:var(--ink-soft);
+    border-top:1px solid var(--grid);
+  }
+  footer a{text-decoration:none;}
+  footer a:hover{color:var(--blue);}
+  .foot-links{display:flex; gap:20px;}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .process{grid-template-columns:repeat(2,1fr);}
+    .proc-step{border-right:1px solid var(--grid);}
+    .proc-step:nth-child(2n){border-right:none;}
+    .projects{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .service-row{grid-template-columns:36px 1fr; }
+    .service-row p{grid-column:2/3;}
+  }
+  @media (max-width:600px){
+    nav a:not(.btn){display:none;}
+    .hero h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <div class="brand">orbita<span class="dot">.</span></div>
+    <nav>
+      <a href="#xizmatlar">Xizmatlar</a>
+      <a href="#jarayon">Jarayon</a>
+      <a href="#loyihalar">Loyihalar</a>
+      <a href="#aloqa">Aloqa</a>
+      <a href="#aloqa" class="btn">Konsultatsiya</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <div>
+    <div class="hero-label"><span class="bar"></span>DASTURLASH STUDIYASI</div>
+    <h1>Biznesingiz uchun mahkam qurilgan dasturiy yechimlar.</h1>
+    <p class="lede">Veb-ilovalardan tortib murakkab backend tizimlargacha — g'oyangizni ishlaydigan mahsulotga aylantiramiz. Kichik jamoa, aniq muddat, tushunarli narx.</p>
+    <div class="hero-ctas">
+      <a href="#aloqa" class="btn btn-solid">Bepul konsultatsiya</a>
+      <a href="#loyihalar" class="btn">Loyihalarni ko'rish</a>
+    </div>
+  </div>
+  <div class="term">
+    <div class="term-bar"><span></span><span></span><span></span></div>
+    <div class="term-body mono">
+      <div><span class="muted">$</span> orbita deploy --env production</div>
+      <div class="c3">→ Build muvaffaqiyatli yakunlandi</div>
+      <div class="c1">✓ API xizmatlari ishga tushdi</div>
+      <div class="c1">✓ Ma'lumotlar bazasi ulandi</div>
+      <div class="c2">↻ SSL sertifikat yangilanmoqda...</div>
+      <div class="c1">✓ Tayyor — sayt onlayn</div>
+      <div class="muted">Ishga tushirish vaqti: 3.2s</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><b>40+</b><span>Yakunlangan loyiha</span></div>
+    <div class="stat"><b>6</b><span>Yillik tajriba</span></div>
+    <div class="stat"><b>98%</b><span>Qaytgan mijozlar</span></div>
+    <div class="stat"><b>12</b><span>Jamoa a'zolari</span></div>
+  </div>
+</div>
+
+<section class="block" id="xizmatlar">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Xizmatlar</h2></div>
+    <div class="services-list">
+      <div class="service-row">
+        <div class="idx">01</div>
+        <h3>Veb-ilovalar</h3>
+        <p>Zamonaviy, tez ishlaydigan va o'sishga moslashgan veb-platformalar — boshqaruv panellaridan tortib mijozlarga mo'ljallangan xizmatlargacha.</p>
+      </div>
+      <div class="service-row">
+        <div class="idx">02</div>
+        <h3>Mobil ilovalar</h3>
+        <p>iOS va Android uchun bitta koddan ishlaydigan yoki har bir platforma uchun alohida optimallashtirilgan ilovalar.</p>
+      </div>
+      <div class="service-row">
+        <div class="idx">03</div>
+        <h3>Backend va infratuzilma</h3>
+        <p>Yuqori yuklamaga bardosh beradigan server arxitekturasi, ma'lumotlar bazasi loyihalash va bulutli joylashtirish.</p>
+      </div>
+      <div class="service-row">
+        <div class="idx">04</div>
+        <h3>UI/UX dizayn</h3>
+        <p>Foydalanuvchi uchun tushunarli, aniq va biznes maqsadlariga xizmat qiladigan interfeys dizayni.</p>
+      </div>
+      <div class="service-row">
+        <div class="idx">05</div>
+        <h3>Integratsiya va avtomatlashtirish</h3>
+        <p>To'lov tizimlari, CRM, ombor va boshqa uchinchi tomon xizmatlari bilan ulanish, qo'lda bajariladigan ishlarni avtomatlashtirish.</p>
+      </div>
+      <div class="service-row">
+        <div class="idx">06</div>
+        <h3>Qo'llab-quvvatlash</h3>
+        <p>Loyiha topshirilgandan keyin ham — monitoring, yangilanishlar va texnik yordam davom etadi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="jarayon" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Ish jarayoni</h2></div>
+    <div class="process">
+      <div class="proc-step">
+        <span class="num">01</span>
+        <h3>Tahlil</h3>
+        <p>Biznes ehtiyojingizni o'rganamiz, texnik topshiriqni birga tuzamiz.</p>
+      </div>
+      <div class="proc-step">
+        <span class="num">02</span>
+        <h3>Loyihalash</h3>
+        <p>Arxitektura va interfeys dizaynini tayyorlab, tasdiqlatib olamiz.</p>
+      </div>
+      <div class="proc-step">
+        <span class="num">03</span>
+        <h3>Ishlab chiqish</h3>
+        <p>Ikki haftalik bosqichlarda kodlashtiramiz, har safar natijani ko'rsatamiz.</p>
+      </div>
+      <div class="proc-step">
+        <span class="num">04</span>
+        <h3>Testlash</h3>
+        <p>Xatoliklarni aniqlaymiz, yukni sinaymiz, xavfsizlikni tekshiramiz.</p>
+      </div>
+      <div class="proc-step">
+        <span class="num">05</span>
+        <h3>Yetkazish</h3>
+        <p>Serverga joylashtiramiz va keyingi oylar davomida kuzatib boramiz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="loyihalar">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Tanlangan loyihalar</h2></div>
+    <div class="projects">
+      <div class="project">
+        <span class="ptag mono">FINTECH · WEB</span>
+        <h3>To'lov agregatori</h3>
+        <p>Kichik bizneslar uchun onlayn to'lovlarni qabul qilish platformasi.</p>
+        <span class="metric">3.4x</span>
+        <span class="metric-label">tranzaksiya tezligi oshdi</span>
+      </div>
+      <div class="project">
+        <span class="ptag mono">LOGISTIKA · MOBILE</span>
+        <h3>Yetkazib berish ilovasi</h3>
+        <p>Haydovchilar va mijozlar uchun real vaqtda kuzatuv tizimi bilan ilova.</p>
+        <span class="metric">-40%</span>
+        <span class="metric-label">yetkazish vaqti qisqardi</span>
+      </div>
+      <div class="project">
+        <span class="ptag mono">SAVDO · WEB</span>
+        <h3>Ombor boshqaruv tizimi</h3>
+        <p>Ko'p filialli savdo tarmog'i uchun markazlashgan ombor va hisobot paneli.</p>
+        <span class="metric">12 soat</span>
+        <span class="metric-label">haftalik ish vaqti tejaldi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" id="aloqa">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num" style="color:var(--orange);">04</span><h2>Loyihangizni muhokama qilaylik</h2></div>
+    <div class="contact-grid">
+      <div>
+        <p class="lede">Formani to'ldiring — 24 soat ichida siz bilan bog'lanamiz va bepul dastlabki konsultatsiya o'tkazamiz.</p>
+        <div class="contact-detail">
+          <div><b>Telefon:</b> +998 90 123 45 67</div>
+          <div><b>Email:</b> hello@orbita.uz</div>
+          <div><b>Manzil:</b> Toshkent, Mirzo Ulug'bek tumani</div>
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:#fff; font-size:16px;\'>Rahmat! Tez orada siz bilan bog\'lanamiz.</p>';">
+        <div class="field">
+          <label for="name">Ismingiz</label>
+          <input id="name" type="text" required placeholder="F.I.Sh.">
+        </div>
+        <div class="field">
+          <label for="phone">Telefon raqamingiz</label>
+          <input id="phone" type="tel" required placeholder="+998 __ ___ __ __">
+        </div>
+        <div class="field">
+          <label for="type">Loyiha turi</label>
+          <select id="type">
+            <option>Veb-ilova</option>
+            <option>Mobil ilova</option>
+            <option>Backend / infratuzilma</option>
+            <option>Boshqa</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">Loyiha haqida qisqacha</label>
+          <textarea id="msg" rows="3" placeholder="Nima qilmoqchisiz?"></textarea>
+        </div>
+        <button type="submit">Yuborish</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© 2026 Orbita. Barcha huquqlar himoyalangan.</span>
+  <div class="foot-links">
+    <a href="#">Telegram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
